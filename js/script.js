@@ -1,6 +1,6 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
-const slides = Array.from($$(".slider .slide"));
+const slides = Array.from($$(".slider-1 .slide"));
 const buttons = $$(".buttons div");
 const dotNode = $(".dots");
 let timeOutId;
@@ -125,10 +125,10 @@ export function getSlideActiveDot() {
 
 export function getDotSlide(index) {
   clearTimeout(timeOutId);
-  slides1.forEach((slide) => {
+  slides.forEach((slide) => {
     slide.classList.remove("active");
   });
-  slides1[index].classList.add("active");
+  slides[index].classList.add("active");
   getPosition();
   getActiveDot();
 }
