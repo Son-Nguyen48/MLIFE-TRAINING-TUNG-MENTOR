@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Poppins:wght@300;400;500;700&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  color: #ffffff;
+}
+
+body {
+  font-size: 2rem;
+}
+
+section {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.slider {
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: -1;
+  background-size: cover;
+  transform: translateX(100%);
+}
+.slide::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(102, 90, 90, 0.432);
+  z-index: -1;
+}
+.slide.active {
+  transform: translateX(0%);
+}
+.slide.top {
+  transition: 0.6s ease transform;
+  z-index: 3;
+}
+
+.slide_1 {
+  background-image: url("https://github.com/ShaifArfan/30days30submits/blob/master/day-25/img/img-1.jpg?raw=true");
+}
+
+.slide_2 {
+  background-image: url("https://github.com/ShaifArfan/30days30submits/blob/master/day-25/img/img-2.jpg?raw=true");
+}
+
+.slide_3 {
+  background-image: url("https://github.com/ShaifArfan/30days30submits/blob/master/day-25/img/img-3.jpg?raw=true");
+}
+
+.slide_4 {
+  background-image: url("https://github.com/ShaifArfan/30days30submits/blob/master/day-25/img/img-4.jpg?raw=true");
+}
+
+/*-------------------------------------------------------------
+Css Button
+*/
+.buttons {
+  position: relative;
+  z-index: 5;
+  height: auto;
+  color: #fff;
+  width: auto;
+  font-size: 5rem;
+}
+.buttons .next,
+.buttons .prev {
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
+  pointer-events: all;
+  padding: 1.6rem;
+  transition: all 0.6s ease;
+}
+.buttons .next:hover,
+.buttons .prev:hover {
+  font-weight: 700;
+}
+.buttons .next {
+  right: 0;
+}
+
+.dots {
+  z-index: 5;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.dots .dot {
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+  background-color: rgb(196, 180, 180);
+  border-radius: 1rem;
+  margin: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease width;
+}
+.dots .dot.active {
+  background-color: #fff;
+  width: 4rem;
+}
+
+/*# sourceMappingURL=style.css.map */
