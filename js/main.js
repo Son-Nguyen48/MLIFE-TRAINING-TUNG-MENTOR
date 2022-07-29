@@ -2,14 +2,15 @@ import { getNextSlide, getPrevSlide, getSlideActiveDot } from "../js/script.js";
 
 function Slider(container) {
   this.container = document.querySelector(container);
-  this.slides = Array.from(this.container.querySelectorAll(".slide"));
-  this.buttons = this.container.querySelectorAll(".buttons div");
+  this.slides = Array.from(this.container.querySelectorAll(".slide__item"));
+  this.nextButton = this.container.querySelector(".next");
+  this.prevButton = this.container.querySelector(".prev");
   this.dotNode = this.container.querySelector(".dots");
   let timeOutId;
   let that = this;
 
   function getElementNextOrPrev() {
-    const activeSlide = that.container.querySelector(".slide.active");
+    const activeSlide = that.container.querySelector(".slide__item.active");
     const activeIndex = that.slides.indexOf(activeSlide);
     let next, prev;
 
@@ -24,12 +25,11 @@ function Slider(container) {
     } else {
       prev = that.slides[activeIndex - 1];
     }
-
     return [next, prev];
   }
 
   function getPosition() {
-    const activeSlide = that.container.querySelector(".slide.active");
+    const activeSlide = that.container.querySelector(".slide__item.active");
     const activeIndex = that.slides.indexOf(activeSlide);
 
     const [next, prev] = getElementNextOrPrev();
@@ -53,7 +53,7 @@ function Slider(container) {
 
   function getNextSlide() {
     clearTimeout(timeOutId);
-    const current = that.container.querySelector(".slide.active");
+    const current = that.container.querySelector(".slide__item.active");
     const [next, prev] = getElementNextOrPrev();
 
     if (current.classList.contains("top")) {
@@ -74,7 +74,7 @@ function Slider(container) {
 
   function getPrevSlide() {
     clearTimeout(timeOutId);
-    const current = that.container.querySelector(".slide.active");
+    const current = that.container.querySelector(".slide__item.active");
     const [next, prev] = getElementNextOrPrev();
     if (current.classList.contains("top")) {
       return;
@@ -92,7 +92,7 @@ function Slider(container) {
 
   function getActiveDot() {
     const allDots = that.container.querySelectorAll(".dots .dot");
-    const activeSlide = that.container.querySelector(".slide.active");
+    const activeSlide = that.container.querySelector(".slide__item.active");
     const activeIndex = that.slides.indexOf(activeSlide);
     allDots.forEach((dot) => {
       dot.classList.remove("active");
@@ -125,12 +125,15 @@ function Slider(container) {
     }, 5000);
   }
 
-  this.buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      if (button.classList.contains("next")) getNextSlide();
-      else if (button.classList.contains("prev")) getPrevSlide();
-    });
-  });
+  // this.buttons.forEach((button) => {
+  //   button.addEventListener("click", () => {
+  //     if (button.classList.contains("next")) getNextSlide();
+  //     else if (button.classList.contains("prev")) getPrevSlide();
+  //   });
+  // });
+
+  this.nextButton.onclick = () => getNextSlide();
+  this.prevButton.onclick = () => getPrevSlide();
 
   this.slides.forEach((slide) => {
     const dot = document.createElement("div");
