@@ -1,8 +1,8 @@
-import { getNextSlide, getPrevSlide, getSlideActiveDot } from "../js/script.js";
+// import { getNextSlide, getPrevSlide, getSlideActiveDot } from "../js/script.js";
 
 function Slider(container) {
   this.container = document.querySelector(container);
-  this.slides = Array.from(this.container.querySelectorAll(".slide__item"));
+  this.slides = Array.from(this.container.querySelectorAll(".slider__item"));
   this.nextButton = this.container.querySelector(".next");
   this.prevButton = this.container.querySelector(".prev");
   this.dotNode = this.container.querySelector(".dots");
@@ -10,7 +10,7 @@ function Slider(container) {
   let that = this;
 
   function getElementNextOrPrev() {
-    const activeSlide = that.container.querySelector(".slide__item.active");
+    const activeSlide = that.container.querySelector(".slider__item.active");
     const activeIndex = that.slides.indexOf(activeSlide);
     let next, prev;
 
@@ -29,7 +29,7 @@ function Slider(container) {
   }
 
   function getPosition() {
-    const activeSlide = that.container.querySelector(".slide__item.active");
+    const activeSlide = that.container.querySelector(".slider__item.active");
     const activeIndex = that.slides.indexOf(activeSlide);
 
     const [next, prev] = getElementNextOrPrev();
@@ -53,7 +53,7 @@ function Slider(container) {
 
   function getNextSlide() {
     clearTimeout(timeOutId);
-    const current = that.container.querySelector(".slide__item.active");
+    const current = that.container.querySelector(".slider__item.active");
     const [next, prev] = getElementNextOrPrev();
 
     if (current.classList.contains("top")) {
@@ -74,7 +74,7 @@ function Slider(container) {
 
   function getPrevSlide() {
     clearTimeout(timeOutId);
-    const current = that.container.querySelector(".slide__item.active");
+    const current = that.container.querySelector(".slider__item.active");
     const [next, prev] = getElementNextOrPrev();
     if (current.classList.contains("top")) {
       return;
@@ -92,7 +92,7 @@ function Slider(container) {
 
   function getActiveDot() {
     const allDots = that.container.querySelectorAll(".dots .dot");
-    const activeSlide = that.container.querySelector(".slide__item.active");
+    const activeSlide = that.container.querySelector(".slider__item.active");
     const activeIndex = that.slides.indexOf(activeSlide);
     allDots.forEach((dot) => {
       dot.classList.remove("active");
