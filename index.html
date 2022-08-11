@@ -4,7 +4,34 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <link rel="stylesheet" href="./styles/css/main.css" />
     <title>To do list</title>
   </head>
-  <body></body>
+  <body>
+    <header class="header">
+      <h1>todos</h1>
+      <button class="check-all">
+        <i class="ph-check-circle"></i>
+      </button>
+      <input
+        type="text"
+        placeholder="What you need to be done?"
+        class="new-todo"
+      />
+    </header>
+    <section class="main">
+      <ul class="todo-list"></ul>
+    </section>
+    <footer class="footer">
+      <span>items left</span>
+      <ul class="filter">
+        <li><a href="#">All</a></li>
+        <li><a href="#">Active</a></li>
+        <li><a href="#">Completed</a></li>
+      </ul>
+      <button class="clear-completed">Clear completed</button>
+    </footer>
+    <script type="module" src="./js/main.js"></script>
+  </body>
 </html>
