@@ -3,7 +3,23 @@ function Store() {
   this.listTodo = [
     {
       id: 1,
-      content: "Toi muon hut thuoc"
+      content: "Toi muon hut thuoc",
+      done: false
+    },
+    {
+      id: 2,
+      content: "Toi muon hut thuoc",
+      done: false
+    },
+    {
+      id: 3,
+      content: "Toi muon hut thuoc",
+      done: false
+    },
+    {
+      id: 4,
+      content: "Toi muon hut thuoc",
+      done: false
     }
   ];
   return {
