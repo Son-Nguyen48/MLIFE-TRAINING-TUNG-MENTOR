@@ -121,6 +121,10 @@ h1 {
           min-width: 50rem;
           overflow: hidden;
           white-space: nowrap;
+          &:focus-visible {
+            border: #b83f45 0.2rem solid;
+            border-radius: 100vmax;
+          }
         }
       }
 

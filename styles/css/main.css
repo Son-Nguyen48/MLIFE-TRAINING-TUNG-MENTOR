@@ -122,6 +122,10 @@ h1 {
   overflow: hidden;
   white-space: nowrap;
 }
+.main .todo-list .todo input.content:focus-visible {
+  border: #b83f45 0.2rem solid;
+  border-radius: 100vmax;
+}
 .main .todo-list .todo .delete {
   cursor: pointer;
   transition: transform 0.6s ease;

@@ -18,7 +18,6 @@ export default function fetchTodo(listTodo) {
   listTodoNode.innerHTML = html;
 
   const todos = document.querySelectorAll(".todo");
-
   todos.forEach((todo) => {
     const idTodo = Number(todo.id);
     const contentTodoInput = todo.querySelector(".content");
