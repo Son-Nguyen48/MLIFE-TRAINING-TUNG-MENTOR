@@ -1,54 +1,58 @@
 import fetchTodo from "../js/fetchtodo.js";
 function Store() {
-  this.listTodo = [
-    {
-      id: 1,
-      content: "Toi muon hut thuoc",
-      done: false
-    },
-    {
-      id: 2,
-      content: "Toi muon hut thuoc",
-      done: false
-    },
-    {
-      id: 3,
-      content: "Toi muon hut thuoc",
-      done: false
-    },
-    {
-      id: 4,
-      content: "Toi muon hut thuoc",
-      done: false
-    }
-  ];
+  const listAPI = "https://62f9ae303c4f110faa8b741e.mockapi.io/todoList";
+
+  fetch(listAPI)
+    .then((response) => response.json())
+    .then((result) => {
+      this.listTodo = result;
+    });
+
   return {
     listTodo: this.listTodo,
-    addTodo: (form) => {
-      const list = this.listTodo;
-      list.push({
-        id: this.listTodo.length + 1,
-        content: `${form.value}`
-      });
-      form.value = "";
-      form.focus();
-      fetchTodo(this.listTodo);
+    addTodo: (data, todo) => {
+      fetch(listAPI, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((posts) => {
+          todo.innerHTML = `<div class="view">
+          <input type="checkbox" class="toggle"/>
+          <input type="text" readonly class="content" value="${posts.content}"/>
+          <button class="delete">X</button>
+      </div>`;
+          todo.id = "id_" + posts.id;
+        });
     },
-    updateTodo: (input, id) => {
-      console.log("go here");
-      this.listTodo = this.listTodo.map((todo) => {
-        if (todo.id === id) {
-          todo.content = input.value;
-        }
-        return todo;
-      });
-
-      fetchTodo(this.listTodo);
+    updateTodo: (data, id, todoContent) => {
+      fetch(listAPI + `/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result);
+          todoContent.value = result.content;
+          console.log(todoContent.value);
+          const readonlyAttribute = document.createAttribute("readonly");
+          todoContent.setAttributeNode(readonlyAttribute);
+        });
     },
-    deleteTodo: (id) => {
-      const todoDeleteIndex = this.listTodo.findIndex((task) => task.id === id);
-      this.listTodo.splice(todoDeleteIndex, 1);
-      fetchTodo(this.listTodo);
+    deleteTodo: (id, todo) => {
+      console.log(id);
+      fetch(listAPI + `/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }
+      })
+        .then((response) => response.json())
+        .then(() => {
+          todo.remove();
+        });
     }
   };
 }

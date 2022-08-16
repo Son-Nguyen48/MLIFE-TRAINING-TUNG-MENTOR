@@ -120,7 +120,7 @@ h1 {
   display: inline-block;
   min-width: 50rem;
   overflow: hidden;
-  white-space: nowrap;
+  padding: 0.8rem;
 }
 .main .todo-list .todo input.content:focus-visible {
   border: #b83f45 0.2rem solid;
