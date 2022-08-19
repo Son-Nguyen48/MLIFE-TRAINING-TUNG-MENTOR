@@ -1,11 +1,18 @@
-import fetchTodo from "../js/fetchtodo.js";
 function Store() {
   const listAPI = "https://62f9ae303c4f110faa8b741e.mockapi.io/todoList";
 
   fetch(listAPI)
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error("api false");
+    })
     .then((result) => {
       this.listTodo = result;
+    })
+    .catch((error) => {
+      console.log(error);
     });
 
   return {
@@ -17,7 +24,10 @@ function Store() {
         body: JSON.stringify(data)
       })
         .then((response) => {
-          return response.json();
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error("api fasle");
         })
         .then((posts) => {
           todo.innerHTML = `<div class="view">
@@ -26,6 +36,9 @@ function Store() {
           <button class="delete">X</button>
       </div>`;
           todo.id = "id_" + posts.id;
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
     updateTodo: (data, id, todoContent) => {
@@ -34,13 +47,20 @@ function Store() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error("api false");
+        })
         .then((result) => {
-          console.log(result);
           todoContent.value = result.content;
-          console.log(todoContent.value);
           const readonlyAttribute = document.createAttribute("readonly");
           todoContent.setAttributeNode(readonlyAttribute);
+          todoContent.style.border = "none";
+        })
+        .catch((error) => {
+          console.error(error);
         });
     },
     deleteTodo: (id, todo) => {
@@ -49,9 +69,17 @@ function Store() {
         method: "DELETE",
         headers: { "Content-Type": "application/json" }
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error("api false");
+        })
         .then(() => {
           todo.remove();
+        })
+        .catch((error) => {
+          console.error(error);
         });
     }
   };

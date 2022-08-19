@@ -1,13 +1,19 @@
-import fetchTodo from "../js/fetchtodo.js";
+import renderTodoList from "../js/renderTodoList.js";
 import Store from "../js/store.js";
 
 const list = document.querySelector(".todo-list");
 const listAPI = "https://62f9ae303c4f110faa8b741e.mockapi.io/todoList";
 
 fetch(listAPI)
-  .then((response) => response.json())
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error("api false");
+  })
   .then((posts) => {
-    fetchTodo(posts);
+    renderTodoList(posts);
+    console.log(posts);
     //Add new task without re-render the list
     const newTodoInput = document.querySelector(".new-todo");
     newTodoInput.addEventListener("keydown", (e) => {
@@ -15,13 +21,15 @@ fetch(listAPI)
         if (newTodoInput.value) {
           const todo = document.createElement("li");
           todo.classList.add("todo");
-          list.appendChild(todo);
           Store.addTodo({ content: newTodoInput.value }, todo);
+          list.appendChild(todo);
           newTodoInput.value = "";
           newTodoInput.focus();
+          console.log(todo);
 
           //Update task without re-render the list
           todo.addEventListener("dblclick", () => {
+            console.log(todo);
             const idTodo = todo.id;
             const idAPI = Number(idTodo.split("_")[1]);
             const todoContent = todo.querySelector(".content");
@@ -55,4 +63,7 @@ fetch(listAPI)
         }
       }
     });
+  })
+  .catch((error) => {
+    console.error(error);
   });

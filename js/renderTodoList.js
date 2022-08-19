@@ -1,6 +1,6 @@
 import Store from "../js/store.js";
 
-export default function fetchTodo(listTodo) {
+export default function renderTodoList(listTodo) {
   let html = "";
   listTodo.forEach((todo) => {
     if (todo.done === false) {
@@ -36,6 +36,8 @@ export default function fetchTodo(listTodo) {
     const idAPI = Number(idTodo.split("_")[1]);
     const contentTodoInput = todo.querySelector(".content");
     contentTodoInput.addEventListener("dblclick", () => {
+      contentTodoInput.style.border = "#b83f45 0.2rem solid";
+      contentTodoInput.style.borderRadius = "100vmax";
       contentTodoInput.removeAttribute("readonly");
       contentTodoInput.focus();
       let contentTodoValue = contentTodoInput.value;
