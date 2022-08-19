@@ -17,8 +17,8 @@ function Store() {
 
   return {
     listTodo: this.listTodo,
-    addTodo: (data, todo) => {
-      fetch(listAPI, {
+    addTodo: async (data, todo) => {
+      await fetch(listAPI, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -41,8 +41,8 @@ function Store() {
           console.log(error);
         });
     },
-    updateTodo: (data, id, todoContent) => {
-      fetch(listAPI + `/${id}`, {
+    updateTodo: async (data, id, todoContent) => {
+      await fetch(listAPI + `/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -63,9 +63,9 @@ function Store() {
           console.error(error);
         });
     },
-    deleteTodo: (id, todo) => {
+    deleteTodo: async (id, todo) => {
       console.log(id);
-      fetch(listAPI + `/${id}`, {
+      await fetch(listAPI + `/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" }
       })

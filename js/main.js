@@ -49,15 +49,13 @@ fetch(listAPI)
             });
           });
           //Delete the new task added
-          setTimeout(() => {
+          console.log(todo);
+          todo.querySelector(".delete").addEventListener("click", () => {
+            const idTodo = todo.id;
+            const idAPI = Number(idTodo.split("_")[1]);
             console.log(todo);
-            todo.querySelector(".delete").addEventListener("click", () => {
-              const idTodo = todo.id;
-              const idAPI = Number(idTodo.split("_")[1]);
-              console.log(todo);
-              Store.deleteTodo(idAPI, todo);
-            });
-          }, 1000);
+            Store.deleteTodo(idAPI, todo);
+          });
         } else {
           alert("Moi nhap task muon lam!");
         }
