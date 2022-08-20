@@ -17,8 +17,9 @@ function Store() {
 
   return {
     listTodo: this.listTodo,
-    addTodo: async (data, todo) => {
-      await fetch(listAPI, {
+    addTodo: (data, todo) => {
+      return fetch(listAPI, {
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -39,6 +40,7 @@ function Store() {
       </div>`
           );
           todo.id = "id_" + posts.id;
+          return todo;
         })
         .catch((error) => {
           console.log(error);
