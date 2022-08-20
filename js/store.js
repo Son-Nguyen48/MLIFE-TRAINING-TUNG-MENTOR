@@ -17,8 +17,8 @@ function Store() {
 
   return {
     listTodo: this.listTodo,
-    addTodo: async (data, todo) => {
-      await fetch(listAPI, {
+    addTodo: (data, todo) => {
+      return fetch(listAPI, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -36,13 +36,14 @@ function Store() {
           <button class="delete">X</button>
       </div>`;
           todo.id = "id_" + posts.id;
+          return todo;
         })
         .catch((error) => {
           console.log(error);
         });
     },
-    updateTodo: async (data, id, todoContent) => {
-      await fetch(listAPI + `/${id}`, {
+    updateTodo: (data, id, todoContent) => {
+      fetch(listAPI + `/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -63,9 +64,9 @@ function Store() {
           console.error(error);
         });
     },
-    deleteTodo: async (id, todo) => {
+    deleteTodo: (id, todo) => {
       console.log(id);
-      await fetch(listAPI + `/${id}`, {
+      fetch(listAPI + `/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" }
       })

@@ -16,18 +16,18 @@ fetch(listAPI)
     console.log(posts);
     //Add new task without re-render the list
     const newTodoInput = document.querySelector(".new-todo");
-    newTodoInput.addEventListener("keydown", (e) => {
+    newTodoInput.addEventListener("keydown", async (e) => {
       if (e.code === "Enter") {
         if (newTodoInput.value) {
-          const todo = document.createElement("li");
+          let todo = document.createElement("li");
           todo.classList.add("todo");
-          Store.addTodo({ content: newTodoInput.value }, todo);
+          todo = await Store.addTodo({ content: newTodoInput.value }, todo);
           list.appendChild(todo);
           newTodoInput.value = "";
           newTodoInput.focus();
           console.log(todo);
 
-          //Update task without re-render the list
+          // Update task without re-render the list
           todo.addEventListener("dblclick", () => {
             console.log(todo);
             const idTodo = todo.id;
@@ -49,7 +49,6 @@ fetch(listAPI)
             });
           });
           //Delete the new task added
-          console.log(todo);
           todo.querySelector(".delete").addEventListener("click", () => {
             const idTodo = todo.id;
             const idAPI = Number(idTodo.split("_")[1]);
