@@ -19,6 +19,7 @@ function Store() {
     listTodo: this.listTodo,
     addTodo: (data, todo) => {
       return fetch(listAPI, {
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -30,11 +31,14 @@ function Store() {
           throw new Error("api fasle");
         })
         .then((posts) => {
-          todo.innerHTML = `<div class="view">
+          todo.insertAdjacentHTML(
+            "afterbegin",
+            `<div class="view">
           <input type="checkbox" class="toggle"/>
           <input type="text" readonly class="content" value="${posts.content}"/>
           <button class="delete">X</button>
-      </div>`;
+      </div>`
+          );
           todo.id = "id_" + posts.id;
           return todo;
         })
@@ -42,8 +46,8 @@ function Store() {
           console.log(error);
         });
     },
-    updateTodo: (data, id, todoContent) => {
-      fetch(listAPI + `/${id}`, {
+    updateTodo: async (data, id, todoContent) => {
+      await fetch(listAPI + `/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -64,9 +68,9 @@ function Store() {
           console.error(error);
         });
     },
-    deleteTodo: (id, todo) => {
+    deleteTodo: async (id, todo) => {
       console.log(id);
-      fetch(listAPI + `/${id}`, {
+      await fetch(listAPI + `/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" }
       })

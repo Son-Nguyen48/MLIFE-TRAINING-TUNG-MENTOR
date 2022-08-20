@@ -21,7 +21,9 @@ fetch(listAPI)
         if (newTodoInput.value) {
           let todo = document.createElement("li");
           todo.classList.add("todo");
+
           todo = await Store.addTodo({ content: newTodoInput.value }, todo);
+
           list.appendChild(todo);
           newTodoInput.value = "";
           newTodoInput.focus();
@@ -49,6 +51,7 @@ fetch(listAPI)
             });
           });
           //Delete the new task added
+          
           todo.querySelector(".delete").addEventListener("click", () => {
             const idTodo = todo.id;
             const idAPI = Number(idTodo.split("_")[1]);
